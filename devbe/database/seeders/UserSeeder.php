@@ -35,11 +35,21 @@ class UserSeeder extends Seeder
             ]
         );
 
-        // Developer (Jovana).
+        // Developer .
         User::updateOrCreate(
             ['email' => 'jovana@devtasker.com'],
             [
                 'name' => 'Jovana',
+                'role' => 'developer',
+                'password' => Hash::make('password'),
+            ]
+        );
+
+         // Developer .
+        User::updateOrCreate(
+            ['email' => 'aleksandra@devtasker.com'],
+            [
+                'name' => 'Aleksandra',
                 'role' => 'developer',
                 'password' => Hash::make('password'),
             ]
