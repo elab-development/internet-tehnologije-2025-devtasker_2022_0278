@@ -1,38 +1,265 @@
-.App {
-  text-align: center;
+/* ========== PALETA BOJA ========== */
+:root {
+  --pink: #fe938c;
+  --sand: #e6b89c;
+  --wheat: #ead2ac;
+  --blue-light: #9ac7db;
+  --blue-dark: #4281a4;
+  --white: #ffffff;
+  --black: #23303a;
+  --gray: #f8f8f8;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ========== GLOBALNI RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: "Segoe UI", "Inter", sans-serif;
+  background-color: var(--gray);
+  color: var(--black);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  margin-left: 300px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+p {
+  font-size: 25px;
+  color: #333;
+}
+
+/* ========== SIDE MENU ========== */
+.sideMenu {
+  width: 260px;
+  background-color: var(--pink);
+  padding: 24px;
   display: flex;
   flex-direction: column;
+  gap: 32px;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+}
+
+.sideMenu__brand {
+  background-color: var(--white);
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.sideMenu__title {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+.sideMenu__meta {
+  font-size: 20px;
+  margin-top: 6px;
+  color: #777;
+}
+
+.sideMenu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.sideMenu__link {
+  background-color: var(--white);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  color: var(--black);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sideMenu__link:hover {
+  background-color: var(--blue-light);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+.sideMenu__link.active {
+  background-color: var(--blue-dark);
+  color: var(--white);
+}
+
+.sideMenu__logout {
+  margin-top: auto;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 12px 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.sideMenu__logout:hover {
+  background-color: var(--blue-dark);
+  transform: scale(1.03);
+}
+
+/* ========== GLAVNI SADRŽAJ ========== */
+.mainContent {
+  flex: 1;
+  padding: 48px;
+  overflow-y: auto;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent h1 {
+  font-size: 42px;
+  margin-bottom: 24px;
+}
+
+.mainContent p {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.shortcutLinks {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.shortcutLinks a {
+  background-color: var(--blue-dark);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.shortcutLinks a:hover {
+  background-color: var(--pink);
+  color: var(--black);
+}
+
+/* ========== METRIKE ========== */
+.metricCard {
+  background-color: var(--wheat);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+
+/* === HOME STYLES === */
+.home {
+  padding: 40px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.home__content {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home__text {
+  max-width: 550px;
+}
+
+.home__text h1 {
+  font-size: 50px;
+  color: var(--blue-dark);
+  margin-bottom: 20px;
+}
+
+.home__text p {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 28px;
+}
+
+.home__actions {
+  display: flex;
+  gap: 20px;
+}
+
+.home__image img {
+  max-width: 700px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* === CTA BUTTONS === */
+.ctaButton {
+  background-color: var(--pink);
+  color: var(--white);
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.ctaButton:hover {
+  background-color: var(--sand);
+}
+
+.ctaButton--alt {
+  background-color: var(--blue-dark);
+  color: var(--white);
+}
+
+.ctaButton--alt:hover {
+  background-color: var(--blue-light);
+  color: var(--white);
+}
+
+.sideMenu__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* ostali stilovi... */
+}
+
+.sideMenu__logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* ostali stilovi... */
+}
+
+.sideMenu__icon {
+  font-size: 30px;
 }
