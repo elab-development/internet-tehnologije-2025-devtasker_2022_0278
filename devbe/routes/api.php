@@ -6,6 +6,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMetricsController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\DeveloperTaskController;
+use App\Http\Controllers\DeveloperCommentController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -27,5 +28,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/my-tasks', [DeveloperTaskController::class, 'index']);
     Route::put('/my-tasks/{task}/status', [DeveloperTaskController::class, 'updateStatus']);
     Route::post('/projects/{project}/my-tasks', [DeveloperTaskController::class, 'storePersonal']);
+
+    Route::post('/my-tasks/{task}/comments', [DeveloperCommentController::class, 'store']);
+    Route::delete('/my-comments/{comment}', [DeveloperCommentController::class, 'destroy']);
+
 
 });
