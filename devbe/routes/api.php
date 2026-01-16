@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMetricsController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\DeveloperTaskController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -18,5 +19,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/projects', [ProjectController::class, 'store']);
     Route::get('/projects/{project}/tasks', [TaskController::class, 'index']);
     Route::get('/projects/{project}/metrics', [ProjectMetricsController::class, 'show']);
+
+    Route::post('/projects/{project}/tasks', [TaskController::class, 'store']);
+    Route::put('/tasks/{task}', [TaskController::class, 'update']);
+
+    //dev rute
+    Route::get('/my-tasks', [DeveloperTaskController::class, 'index']);
+    Route::put('/my-tasks/{task}/status', [DeveloperTaskController::class, 'updateStatus']);
+    Route::post('/projects/{project}/my-tasks', [DeveloperTaskController::class, 'storePersonal']);
 
 });
