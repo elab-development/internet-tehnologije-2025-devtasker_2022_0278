@@ -23,8 +23,9 @@ body {
   color: var(--black);
   display: flex;
   height: 100vh;
-  overflow: hidden;
-  margin-left: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-left: 280px;
 }
 
 a {
@@ -126,7 +127,7 @@ p {
 /* ========== GLAVNI SADRŽAJ ========== */
 .mainContent {
   flex: 1;
-  padding: 48px;
+  padding: 20px;
   overflow-y: auto;
   background-color: var(--gray);
   display: flex;
@@ -325,5 +326,180 @@ p {
   font-weight: 600;
   margin-bottom: 16px;
   color: var(--blue-dark);
+}
+
+.tagsPage {
+  flex: 1;
+  padding: 10px;
+  background-color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 40px; 
+}
+
+.tagsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.tagsSubtitle {
+  font-size: 20px;
+  color: #444;
+  max-width: 850px;
+  line-height: 1.4;
+}
+
+.tagsHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tagsPill {
+  background-color: var(--blue-dark);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.tagsLayout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.tagsCard {
+  background-color: var(--wheat);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+
+.tagsCard h2 {
+  margin-bottom: 10px;
+}
+
+.tagsHelp {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.tagsMessage {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+.tagsMessage--error {
+  background-color: rgba(254, 147, 140, 0.28);
+  border: 1px solid rgba(254, 147, 140, 0.55);
+  color: var(--black);
+}
+
+.tagsTableTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+
+.tagsLoading {
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+/* ===== Table standard (for tags) ===== */
+.tagsTableWrap {
+  background: var(--white);
+  border-radius: 16px;
+  overflow-y: auto;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.tagsTable {
+  width: 570px;
+  border-collapse: collapse;
+}
+
+.tagsTable thead th {
+  background-color: var(--blue-light);
+  color: var(--black);
+  font-weight: 800;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.tagsTable tbody td {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  font-size: 16px;
+}
+
+.tagsTable tbody tr:hover td {
+  background-color: rgba(230, 184, 156, 0.20);
+}
+
+.tagsEmpty {
+  padding: 18px;
+  text-align: center;
+  font-weight: 700;
+  color: #555;
+}
+
+.tagsMono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #666;
+  font-size: 14px;
+}
+
+.tagsName {
+  font-weight: 700;
+  color: var(--black);
+}
+
+.tagsInlineInput {
+  max-width: 420px;
+}
+
+/* Actions */
+.tagsActions {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.tagsDangerBtn {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.tagsDangerBtn:hover {
+  background-color: var(--pink);
+  color: var(--white);
+}
+
+.tagsFootNote {
+  margin-top: 14px;
+  font-size: 16px;
+  color: #555;
+}
+
+.tagsTableWrap {
+  height: 300px;   /* ili calc(100vh - 360px) */
+  overflow-y: auto;
 }
 

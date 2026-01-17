@@ -7,6 +7,7 @@ use App\Http\Controllers\ProjectMetricsController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\DeveloperTaskController;
 use App\Http\Controllers\DeveloperCommentController;
+use App\Http\Controllers\TagController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -31,6 +32,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/my-tasks/{task}/comments', [DeveloperCommentController::class, 'store']);
     Route::delete('/my-comments/{comment}', [DeveloperCommentController::class, 'destroy']);
+
+    //admin rute
+    Route::get('/tags', [TagController::class, 'index']);
+    Route::post('/tags', [TagController::class, 'store']);
+    Route::put('/tags/{tag}', [TagController::class, 'update']);
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy']);
+
+
 
 
 });
