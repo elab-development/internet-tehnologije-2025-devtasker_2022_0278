@@ -124,7 +124,6 @@ p {
   transform: scale(1.03);
 }
 
-/* ========== GLAVNI SADRŽAJ ========== */
 .mainContent {
   flex: 1;
   padding: 20px;
@@ -502,4 +501,269 @@ p {
   height: 300px;   /* ili calc(100vh - 360px) */
   overflow-y: auto;
 }
+
+/* =========================
+   PROJECTS PAGE
+   ========================= */
+
+.projectsPage {
+  flex: 1;
+  padding: 48px;
+  overflow-y: auto;
+  background-color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.projectsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.projectsSubtitle {
+  font-size: 20px;
+  color: #444;
+  max-width: 900px;
+  line-height: 1.4;
+}
+
+.projectsHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.projectsPill {
+  background-color: var(--blue-dark);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.projectsMessage {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+.projectsMessage--error {
+  background-color: rgba(254, 147, 140, 0.28);
+  border: 1px solid rgba(254, 147, 140, 0.55);
+  color: var(--black);
+}
+
+/* Top section: create + info */
+.projectsTop {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .projectsTop {
+    grid-template-columns: 1fr;
+  }
+}
+
+.projectsCard {
+  background-color: var(--wheat);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+
+.projectsHelp {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.projectsTextarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.projectsDates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 560px) {
+  .projectsDates {
+    grid-template-columns: 1fr;
+  }
+}
+
+.projectsInfoCard {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.projectsList {
+  margin-top: 10px;
+  margin-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #444;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.projectsStatRow {
+  margin-top: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.projectsStat {
+  background-color: rgba(154, 199, 219, 0.28);
+  border: 1px solid rgba(66, 129, 164, 0.25);
+  border-radius: 16px;
+  padding: 14px 16px;
+  min-width: 160px;
+}
+
+.projectsStatValue {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--blue-dark);
+}
+
+.projectsStatLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: #444;
+}
+
+/* Grid header */
+.projectsGridHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.projectsGridMeta {
+  font-size: 18px;
+  font-weight: 700;
+  color: #444;
+}
+
+/* Project cards grid */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 1200px) {
+  .projectsGrid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.projectsEmpty {
+  background-color: rgba(230, 184, 156, 0.25);
+  border: 1px solid rgba(230, 184, 156, 0.55);
+  border-radius: 16px;
+  padding: 18px;
+  font-weight: 700;
+  color: #444;
+}
+
+/* Single project card */
+.projectCard {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.10);
+}
+
+.projectCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.projectTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--blue-dark);
+}
+
+.projectId {
+  background-color: rgba(254, 147, 140, 0.22);
+  border: 1px solid rgba(254, 147, 140, 0.45);
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  color: var(--black);
+}
+
+.projectDesc {
+  color: #444;
+  font-size: 16px;
+  line-height: 1.4;
+  min-height: 44px;
+}
+
+.projectDates {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: #444;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.projectDateLabel {
+  color: #777;
+  font-weight: 700;
+}
+
+.projectDateValue {
+  color: #333;
+  font-weight: 800;
+}
+
+.projectActions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
 
