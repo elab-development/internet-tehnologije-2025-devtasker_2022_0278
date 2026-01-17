@@ -767,3 +767,318 @@ p {
 }
 
 
+/* =========================
+   PROJECT BOARD
+   ========================= */
+
+.boardPage {
+  flex: 1;
+  padding: 48px;
+  overflow-y: auto;
+  background-color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.boardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.boardSubtitle {
+  font-size: 20px;
+  color: #444;
+  max-width: 900px;
+  line-height: 1.4;
+}
+
+.boardHeaderActions {
+  display: flex;
+  gap: 12px;
+}
+
+.boardMessage {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+.boardMessage--error {
+  background-color: rgba(254, 147, 140, 0.28);
+  border: 1px solid rgba(254, 147, 140, 0.55);
+  color: var(--black);
+}
+
+.boardTop {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .boardTop {
+    grid-template-columns: 1fr;
+  }
+}
+
+.boardCard {
+  background-color: var(--wheat);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+
+.boardTextarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.boardRow2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 560px) {
+  .boardRow2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.boardInfo {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.boardLegend {
+  margin-top: 10px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 18px;
+  color: #444;
+}
+
+.boardLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.boardDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.boardDot--created {
+  background-color: var(--pink);
+}
+
+.boardDot--started {
+  background-color: var(--sand);
+}
+
+.boardDot--progress {
+  background-color: var(--blue-dark);
+}
+
+.boardDot--done {
+  background-color: var(--blue-light);
+}
+
+.boardSmallInfo {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #444;
+}
+
+/* Kanban grid */
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .kanban {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kanbanCol {
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.kanbanColHead {
+  padding: 14px 16px;
+  background-color: rgba(154, 199, 219, 0.45);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kanbanColTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+}
+
+.kanbanColCount {
+  background-color: rgba(254, 147, 140, 0.22);
+  border: 1px solid rgba(254, 147, 140, 0.45);
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  color: var(--black);
+}
+
+.kanbanColBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kanbanEmpty {
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(230, 184, 156, 0.18);
+  border: 1px solid rgba(230, 184, 156, 0.45);
+  font-weight: 700;
+  color: #444;
+  text-align: center;
+}
+
+/* Task card */
+.taskCard {
+  background-color: var(--gray);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.taskTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.taskTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--black);
+  line-height: 1.2;
+}
+
+.taskId {
+  background-color: rgba(156, 175, 183, 0.22);
+  border: 1px solid rgba(156, 175, 183, 0.5);
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 800;
+  color: #444;
+  white-space: nowrap;
+}
+
+.taskMeta {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tagPill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.tagPill--pink {
+  background-color: rgba(254, 147, 140, 0.25);
+}
+
+.tagPill--blue {
+  background-color: rgba(154, 199, 219, 0.35);
+}
+
+.tagPill--dark {
+  background-color: rgba(66, 129, 164, 0.25);
+}
+
+.tagPill--sand {
+  background-color: rgba(230, 184, 156, 0.30);
+}
+
+.tagPill--wheat {
+  background-color: rgba(219, 218, 213, 0.75);
+}
+
+.assigneePill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+  background-color: rgba(55, 74, 88, 0.08);
+  border: 1px solid rgba(55, 74, 88, 0.12);
+  color: #333;
+}
+
+.taskDesc {
+  margin-top: 10px;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.taskDesc--empty {
+  color: #777;
+}
+
+.taskActions {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.taskMove {
+  min-width: 180px;
+}
+
+.taskMoveSelect {
+  padding: 10px 12px;
+}
+
+/* Edit inside card */
+.taskEdit {
+  margin-top: 12px;
+}
+
+.taskEdit .form-control {
+  width: 100%;
+}
+
+
