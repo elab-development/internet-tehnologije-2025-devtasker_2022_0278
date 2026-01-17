@@ -52,11 +52,16 @@ export default function SideMenu({ token, role, onLogoutSuccess }) {
             <FaProjectDiagram /> Projects
           </NavLink>
         )}
-        {token && role === "developer" && (
-          <NavLink to="/my-tasks" className={linkClass}>
-            <FaTasks /> My Tasks
-          </NavLink>
-        )}
+       {role === "developer" ? (
+          <>
+            <NavLink className="sideMenu__link" to="/dev">
+              Home
+            </NavLink>
+            <NavLink className="sideMenu__link" to="/my-tasks">
+              My tasks
+            </NavLink>
+          </>
+        ) : null}
         {token && role === "taskadmin" && (
           <NavLink to="/tags" className={linkClass}>
             <FaTags /> Tags

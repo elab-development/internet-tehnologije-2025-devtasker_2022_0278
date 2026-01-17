@@ -16,6 +16,7 @@ import MyTasks from "./pages/MyTasks";
 import TaskDetails from "./pages/TaskDetails";
 
 import Tags from "./pages/Tags";
+import DevHome from "./pages/DevHome";
 
 function getHomeRoute(role) {
   switch (role) {
@@ -119,6 +120,10 @@ export default function App() {
             <Route
               path="/tasks/:taskId"
               element={requireRole(["developer"], <TaskDetails />)}
+            />
+            <Route
+              path="/dev"
+              element={requireRole(["developer"], <DevHome />)}
             />
 
             {/* Admin */}

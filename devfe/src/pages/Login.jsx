@@ -8,7 +8,7 @@ function getHomeRoute(role) {
     case "product_owner":
       return "/projects";
     case "developer":
-      return "/my-tasks";
+      return "/dev";
     case "taskadmin":
       return "/tags";
     default:
