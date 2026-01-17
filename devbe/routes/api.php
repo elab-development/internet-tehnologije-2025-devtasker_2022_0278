@@ -18,12 +18,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
 
     //po rute
+    Route::get('/projects', [ProjectController::class, 'index']);
     Route::post('/projects', [ProjectController::class, 'store']);
     Route::get('/projects/{project}/tasks', [TaskController::class, 'index']);
     Route::get('/projects/{project}/metrics', [ProjectMetricsController::class, 'show']);
 
     Route::post('/projects/{project}/tasks', [TaskController::class, 'store']);
     Route::put('/tasks/{task}', [TaskController::class, 'update']);
+
+    Route::get('/tags/lookup', [TagController::class, 'lookup']);
+    Route::get('/projects/{project}/developers', [ProjectController::class, 'developers']);
 
     //dev rute
     Route::get('/my-tasks', [DeveloperTaskController::class, 'index']);

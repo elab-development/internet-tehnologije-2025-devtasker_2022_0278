@@ -92,4 +92,16 @@ class TagController extends Controller
             'data' => null,
         ]);
     }
+
+    //treba nam za frontend da po vidi sve tagove
+    public function lookup(Request $request)
+    {
+      
+        $tags = Tag::query()->orderBy('name')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => TagResource::collection($tags),
+        ]);
+    }
 }

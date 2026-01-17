@@ -53,4 +53,56 @@ class ProjectController extends Controller
             'data' => new ProjectResource($project),
         ], 201);
     }
+
+
+    //vracanje projekata
+    public function index(Request $request)
+    {
+        if ($resp = $this->ensureProductOwner($request)) {
+            return $resp;
+        }
+
+        // PO vidi svoje projekte (one gde je član u pivot tabeli project_user)
+        $projects = Project::query()
+            ->whereHas('users', function ($q) use ($request) {
+                $q->where('users.id', $request->user()->id);
+            })
+            ->orderByDesc('id')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => ProjectResource::collection($projects),
+        ]);
+    }
+
+    //vracanje developera na tom projektu
+    public function developers(Request $request, Project $project)
+    {
+        if ($resp = $this->ensureProductOwner($request)) {
+            return $resp;
+        }
+
+        // PO mora biti član projekta (isto pravilo kao taskovi)
+        if (! $project->users()->where('users.id', $request->user()->id)->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Nemate pristup ovom projektu.',
+                'errors' => [
+                    'authorization' => ['Niste član ovog projekta.'],
+                ],
+            ], 403);
+        }
+
+        // samo developeri koji su članovi projekta
+        $developers = $project->users()
+            ->where('role', 'developer')
+            ->orderBy('name')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => UserResource::collection($developers),
+        ]);
+    }
 }
