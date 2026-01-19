@@ -17,6 +17,7 @@ import TaskDetails from "./pages/TaskDetails";
 
 import Tags from "./pages/Tags";
 import DevHome from "./pages/DevHome";
+import Footer from "./components/Footer"
 
 function getHomeRoute(role) {
   switch (role) {
@@ -136,6 +137,7 @@ export default function App() {
             <Route path="*" element={<Navigate to={token ? homeRoute : "/"} replace />} />
           </Routes>
         </main>
+        <Footer></Footer>
       </div>
     </BrowserRouter>
   );
