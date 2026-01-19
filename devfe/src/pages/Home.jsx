@@ -18,30 +18,6 @@ export default function Home() {
               </div>
             </>
           )}
-
-          {token && role === "product_owner" && (
-            <>
-              <p>Quick access to your workspace:</p>
-              <div className="home__actions">
-                <Link to="/projects" className="ctaButton">Projects</Link>
-                <Link to="/metrics" className="ctaButton ctaButton--alt">Metrics</Link>
-              </div>
-            </>
-          )}
-
-          {token && role === "developer" && (
-            <>
-              <p>Ready to code?</p>
-              <Link to="/my-tasks" className="ctaButton">My Tasks</Link>
-            </>
-          )}
-
-          {token && role === "taskadmin" && (
-            <>
-              <p>Manage tagging system below:</p>
-              <Link to="/tags" className="ctaButton">Tags</Link>
-            </>
-          )}
         </div>
 
         <div className="home__image">
