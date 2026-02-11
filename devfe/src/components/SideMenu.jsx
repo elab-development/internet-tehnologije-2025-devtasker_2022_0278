@@ -60,6 +60,9 @@ export default function SideMenu({ token, role, onLogoutSuccess }) {
             <NavLink className="sideMenu__link" to="/my-tasks">
               My tasks
             </NavLink>
+            <NavLink className="sideMenu__link" to="/youtube">
+              Youtube
+            </NavLink>
           </>
         ) : null}
         {token && role === "taskadmin" && (

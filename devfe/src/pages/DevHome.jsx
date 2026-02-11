@@ -41,9 +41,6 @@ export default function DevHome() {
             <button className="ctaButton" type="button">
               My tasks
             </button>
-            <button className="ctaButton ctaButton--alt" type="button">
-              Open last task
-            </button>
           </div>
         </div>
 
