@@ -37,6 +37,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/my-tasks/{task}/comments', [DeveloperCommentController::class, 'store']);
     Route::delete('/my-comments/{comment}', [DeveloperCommentController::class, 'destroy']);
 
+    Route::get('/my-projects', [ProjectController::class, 'myProjects']);
+
     //admin rute
     Route::get('/tags', [TagController::class, 'index']);
     Route::post('/tags', [TagController::class, 'store']);

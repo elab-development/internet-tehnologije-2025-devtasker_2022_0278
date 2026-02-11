@@ -106,4 +106,27 @@ class ProjectController extends Controller
             'data' => UserResource::collection($developers),
         ]);
     }
+
+
+    public function myProjects(Request $request)
+    {
+        // opciono: ako hoćeš striktno samo developer.
+        if ($request->user()->role !== 'developer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Nemate dozvolu za ovu akciju.',
+                'errors' => [
+                    'authorization' => ['Samo Developer može da vidi svoje projekte.'],
+                ],
+            ], 403);
+        }
+
+        // Pretpostavka: pivot veza projects <-> users postoji (project_user tabela).
+        $projects = $request->user()->projects()->orderBy('id', 'desc')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $projects,
+        ]);
+    }
 }

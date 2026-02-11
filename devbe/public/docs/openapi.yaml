@@ -1,0 +1,1355 @@
+openapi: 3.0.3
+info:
+  title: API specifikacija
+  version: 1.0.0
+  description: 'OpenAPI specifikacija za Laravel (Sanctum) backend. Base path: /api.'
+servers:
+- url: /api
+  description: Laravel API base
+components:
+  securitySchemes:
+    sanctumBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: Token
+      description: 'Laravel Sanctum token. Pošalji u header: Authorization: Bearer
+        {token}.'
+  schemas:
+    ValidationErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          nullable: true
+          example: Validacija nije uspela.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      required:
+      - success
+      - errors
+    AuthErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: Neispravni kredencijali.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      required:
+      - success
+      - message
+      - errors
+    ForbiddenResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: Nemate dozvolu za ovu akciju.
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      required:
+      - success
+      - message
+      - errors
+    NullDataResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          nullable: true
+        data:
+          nullable: true
+      required:
+      - success
+      - data
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Ana
+        email:
+          type: string
+          example: ana@example.com
+        role:
+          type: string
+          example: developer
+      required:
+      - id
+      - name
+      - email
+      - role
+      additionalProperties: true
+    AuthPayload:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+          example: 1|xxxxxxxxxxxxxxxx
+      required:
+      - user
+      - token
+    AuthSuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Prijava uspešna.
+        data:
+          $ref: '#/components/schemas/AuthPayload'
+      required:
+      - success
+      - message
+      - data
+    MeSuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Ulogovani korisnik.
+        data:
+          type: object
+          properties:
+            user:
+              $ref: '#/components/schemas/User'
+          required:
+          - user
+      required:
+      - success
+      - message
+      - data
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: Bug
+      required:
+      - id
+      - name
+      additionalProperties: true
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 10
+        title:
+          type: string
+          example: AI Pilot Project
+        description:
+          type: string
+          nullable: true
+          example: Opis projekta.
+        start_date:
+          type: string
+          format: date
+          nullable: true
+          example: '2026-01-01'
+        end_date:
+          type: string
+          format: date
+          nullable: true
+          example: '2026-03-01'
+      required:
+      - id
+      - title
+      additionalProperties: true
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 55
+        task_id:
+          type: integer
+          example: 101
+        user:
+          $ref: '#/components/schemas/User'
+        content:
+          type: string
+          example: Krenuo sam da radim na ovome.
+      required:
+      - id
+      - task_id
+      - content
+      additionalProperties: true
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 101
+        project_id:
+          type: integer
+          example: 10
+        tag:
+          $ref: '#/components/schemas/Tag'
+        title:
+          type: string
+          example: Implementirati login
+        description:
+          type: string
+          nullable: true
+          example: Dodati validaciju i testirati.
+        status:
+          type: string
+          enum:
+          - created
+          - started
+          - in_progress
+          - done
+          example: created
+        priority:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+          example: medium
+        due_date:
+          type: string
+          format: date
+          nullable: true
+          example: '2026-02-20'
+        creator:
+          $ref: '#/components/schemas/User'
+        assignee:
+          $ref: '#/components/schemas/User'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+      required:
+      - id
+      - project_id
+      - title
+      - status
+      - priority
+      additionalProperties: true
+    ProjectListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+      required:
+      - success
+      - data
+    ProjectResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Project'
+      required:
+      - success
+      - data
+    TaskListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+      required:
+      - success
+      - data
+    TaskResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - success
+      - data
+    TagListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+      required:
+      - success
+      - data
+    TagResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Tag'
+      required:
+      - success
+      - data
+    DeveloperListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+      required:
+      - success
+      - data
+    CommentResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Comment'
+      required:
+      - success
+      - data
+    ProjectMetricsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            project_id:
+              type: integer
+              example: 10
+            cards:
+              type: object
+              properties:
+                total_tasks:
+                  type: integer
+                  example: 42
+                open_tasks:
+                  type: integer
+                  example: 30
+                done_tasks:
+                  type: integer
+                  example: 12
+                overdue:
+                  type: integer
+                  example: 2
+                due_soon_7d:
+                  type: integer
+                  example: 5
+              required:
+              - total_tasks
+              - open_tasks
+              - done_tasks
+              - overdue
+              - due_soon_7d
+            charts:
+              type: object
+              properties:
+                status_pie:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChartKeyValue'
+                priority_bar:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChartKeyValue'
+                developer_load:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DeveloperLoadItem'
+              required:
+              - status_pie
+              - priority_bar
+              - developer_load
+          required:
+          - project_id
+          - cards
+          - charts
+      required:
+      - success
+      - data
+    ChartKeyValue:
+      type: object
+      properties:
+        key:
+          type: string
+          example: done
+        value:
+          type: integer
+          example: 12
+      required:
+      - key
+      - value
+    DeveloperLoadItem:
+      type: object
+      properties:
+        developer:
+          oneOf:
+          - $ref: '#/components/schemas/User'
+          - type: 'null'
+        open_tasks:
+          type: integer
+          example: 7
+      required:
+      - developer
+      - open_tasks
+paths:
+  /register:
+    post:
+      tags:
+      - Auth
+      summary: Registracija korisnika (role=developer).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 2
+                  maxLength: 100
+                email:
+                  type: string
+                  format: email
+                  maxLength: 150
+                password:
+                  type: string
+                  maxLength: 255
+              required:
+              - name
+              - email
+              - password
+            examples:
+              register:
+                summary: register
+                value:
+                  name: Maja
+                  email: maja@devtasker.com
+                  password: password
+      responses:
+        '201':
+          description: Kreiran korisnik + token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSuccessResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+  /login:
+    post:
+      tags:
+      - Auth
+      summary: Prijava (vraća Sanctum token).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  maxLength: 150
+                password:
+                  type: string
+                  maxLength: 255
+              required:
+              - email
+              - password
+            examples:
+              login_product_owner:
+                summary: login product owner
+                value:
+                  email: andrea@devtasker.com
+                  password: password
+              login_dev:
+                summary: login dev
+                value:
+                  email: jovana@devtasker.com
+                  password: password
+              login_dev_admin:
+                summary: login dev admin
+                value:
+                  email: jovana@devtasker.com
+                  password: password
+      responses:
+        '200':
+          description: User + token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSuccessResponse'
+        '401':
+          description: Neispravni kredencijali.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthErrorResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+  /logout:
+    post:
+      tags:
+      - Auth
+      summary: Odjava (briše current token).
+      security: &id001
+      - sanctumBearer: []
+      responses:
+        '200':
+          description: Odjava uspešna.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NullDataResponse'
+        '401':
+          description: Neautorizovano.
+  /me:
+    get:
+      tags:
+      - Auth
+      summary: Vraća ulogovanog korisnika.
+      security: *id001
+      responses:
+        '200':
+          description: Ulogovani korisnik.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeSuccessResponse'
+        '401':
+          description: Neautorizovano.
+  /projects:
+    get:
+      tags:
+      - Projects
+      summary: Lista projekata za product owner-a (samo projekti gde je član).
+      security: *id001
+      responses:
+        '200':
+          description: Lista projekata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectListResponse'
+        '403':
+          description: Zabranjeno (role != product_owner).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+    post:
+      tags:
+      - Projects
+      summary: Kreiranje projekta (samo product_owner).
+      security: *id001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 2
+                  maxLength: 120
+                description:
+                  type: string
+                  nullable: true
+                  maxLength: 2000
+                start_date:
+                  type: string
+                  format: date
+                  nullable: true
+                end_date:
+                  type: string
+                  format: date
+                  nullable: true
+              required:
+              - title
+            examples:
+              kreiranje_projekta:
+                summary: kreiranje projekta
+                value:
+                  title: Novi projekat
+                  description: Opis
+                  start_date: '2026-01-20'
+                  end_date: '2026-03-01'
+      responses:
+        '201':
+          description: Kreiran projekat.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+  /projects/{project}/developers:
+    get:
+      tags:
+      - Projects
+      summary: Lista developera na projektu (samo product_owner i član projekta).
+      security: *id001
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Lista developera.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeveloperListResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Projekat ne postoji.
+  /projects/{project}/tasks:
+    get:
+      tags:
+      - Tasks (PO)
+      summary: Lista taskova u projektu (samo product_owner i član projekta). Podržava
+        filtere.
+      security: *id001
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - created
+          - started
+          - in_progress
+          - done
+      - name: priority
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - low
+          - medium
+          - high
+      - name: tag_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Lista taskova.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskListResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Projekat ne postoji.
+    post:
+      tags:
+      - Tasks (PO)
+      summary: Kreiranje taska i dodela developeru (samo product_owner i član projekta).
+      security: *id001
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 2
+                  maxLength: 160
+                description:
+                  type: string
+                  nullable: true
+                  maxLength: 3000
+                tag_id:
+                  type: integer
+                status:
+                  type: string
+                  enum:
+                  - created
+                  - started
+                  - in_progress
+                  - done
+                  nullable: true
+                priority:
+                  type: string
+                  enum:
+                  - low
+                  - medium
+                  - high
+                  nullable: true
+                due_date:
+                  type: string
+                  format: date
+                  nullable: true
+                assigned_to:
+                  type: integer
+                  description: ID developera (mora imati role=developer i biti član
+                    projekta).
+              required:
+              - title
+              - tag_id
+              - assigned_to
+            examples:
+              kreiranje_taska:
+                summary: kreiranje taska
+                value:
+                  title: Napraviti filtere hittt
+                  description: Filter po statusu, prioritetu i tagu
+                  tag_id: 2
+                  status: created
+                  priority: high
+                  due_date: '2026-02-01'
+                  assigned_to: 3
+      responses:
+        '201':
+          description: Kreiran task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija ili poslovno pravilo (npr. assigned_to nije developer
+            ili nije član).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Projekat ne postoji.
+  /tasks/{task}:
+    put:
+      tags:
+      - Tasks (PO)
+      summary: Izmena taska (samo product_owner i član projekta).
+      security: *id001
+      parameters:
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 2
+                  maxLength: 160
+                description:
+                  type: string
+                  nullable: true
+                  maxLength: 3000
+                tag_id:
+                  type: integer
+                status:
+                  type: string
+                  enum:
+                  - created
+                  - started
+                  - in_progress
+                  - done
+                priority:
+                  type: string
+                  enum:
+                  - low
+                  - medium
+                  - high
+                due_date:
+                  type: string
+                  format: date
+                  nullable: true
+                assigned_to:
+                  type: integer
+                  description: ID developera (role=developer i član projekta).
+              required:
+              - tag_id
+              - status
+              - priority
+              - assigned_to
+            examples:
+              azuriranje_taska:
+                summary: azuriranje taska
+                value:
+                  title: update
+                  description: Filter po statusu, prioritetu i tagu
+                  tag_id: 2
+                  status: created
+                  priority: high
+                  due_date: '2026-02-01'
+                  assigned_to: 3
+      responses:
+        '200':
+          description: Ažuriran task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija ili poslovno pravilo.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Task ne postoji.
+  /projects/{project}/metrics:
+    get:
+      tags:
+      - Projects
+      summary: Metrike projekta (samo product_owner i član projekta).
+      security: *id001
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Metrike projekta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMetricsResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Projekat ne postoji.
+  /tags/lookup:
+    get:
+      tags:
+      - Tags
+      summary: Lookup tagova (za frontend; bilo koji ulogovan korisnik).
+      security: *id001
+      responses:
+        '200':
+          description: Lista tagova.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListResponse'
+        '401':
+          description: Neautorizovano.
+  /my-tasks:
+    get:
+      tags:
+      - Developer
+      summary: Lista taskova dodeljenih ulogovanom developeru.
+      security: *id001
+      responses:
+        '200':
+          description: Lista taskova.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskListResponse'
+        '403':
+          description: Zabranjeno (role != developer).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+  /my-tasks/{task}/status:
+    put:
+      tags:
+      - Developer
+      summary: Izmena statusa svog taska (developer).
+      security: *id001
+      parameters:
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - created
+                  - started
+                  - in_progress
+                  - done
+              required:
+              - status
+            examples:
+              azuriraj_moj_task:
+                summary: azuriraj moj task
+                value:
+                  status: created
+      responses:
+        '200':
+          description: Ažuriran task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '403':
+          description: Zabranjeno (nije njegov task ili nije developer).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Task ne postoji.
+  /projects/{project}/my-tasks:
+    post:
+      tags:
+      - Developer
+      summary: Developer kreira 'personal' task u projektu (dodeljen sebi). Mora biti
+        član projekta.
+      security: *id001
+      parameters:
+      - name: project
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 2
+                  maxLength: 160
+                description:
+                  type: string
+                  nullable: true
+                  maxLength: 3000
+                tag_id:
+                  type: integer
+                priority:
+                  type: string
+                  enum:
+                  - low
+                  - medium
+                  - high
+                  nullable: true
+                due_date:
+                  type: string
+                  format: date
+                  nullable: true
+                status:
+                  type: string
+                  enum:
+                  - created
+                  - started
+                  - in_progress
+                  - done
+                  nullable: true
+              required:
+              - title
+              - tag_id
+            examples:
+              nov_task_na_projektu:
+                summary: nov task na projektu
+                value:
+                  title: Moj lični task
+                  description: Da završim ovo do petka.
+                  tag_id: 2
+                  priority: high
+                  due_date: '2026-02-01'
+                  status: created
+              novi_komentar_na_tasku:
+                summary: novi komentar na tasku
+                value:
+                  title: Moj lični task
+                  description: Da završim ovo do petka.
+                  tag_id: 2
+                  priority: high
+                  due_date: '2026-02-01'
+                  status: created
+      responses:
+        '201':
+          description: Kreiran task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+        '403':
+          description: Zabranjeno (nije developer ili nije član projekta).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Projekat ne postoji.
+  /my-tasks/{task}/comments:
+    post:
+      tags:
+      - Developer
+      summary: Dodavanje komentara na svoj task (developer).
+      security: *id001
+      parameters:
+      - name: task
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+              required:
+              - content
+      responses:
+        '201':
+          description: Kreiran komentar.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+        '403':
+          description: Zabranjeno (nije developer ili task nije dodeljen njemu).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Task ne postoji.
+  /my-comments/{comment}:
+    delete:
+      tags:
+      - Developer
+      summary: Brisanje svog komentara na svom tasku (developer).
+      security: *id001
+      parameters:
+      - name: comment
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Obrisano.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NullDataResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Komentar ne postoji.
+  /tags:
+    get:
+      tags:
+      - Tags (Admin)
+      summary: Lista tagova (samo taskadmin).
+      security: *id001
+      responses:
+        '200':
+          description: Lista tagova.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListResponse'
+        '403':
+          description: Zabranjeno (role != taskadmin).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+    post:
+      tags:
+      - Tags (Admin)
+      summary: Kreiranje taga (samo taskadmin).
+      security: *id001
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+              required:
+              - name
+      responses:
+        '201':
+          description: Kreiran tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+  /tags/{tag}:
+    put:
+      tags:
+      - Tags (Admin)
+      summary: Izmena taga (samo taskadmin).
+      security: *id001
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+              required:
+              - name
+      responses:
+        '200':
+          description: Ažuriran tag.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '422':
+          description: Validacija nije uspela.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Tag ne postoji.
+    delete:
+      tags:
+      - Tags (Admin)
+      summary: Brisanje taga (samo taskadmin).
+      security: *id001
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Obrisano.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NullDataResponse'
+        '403':
+          description: Zabranjeno.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+        '401':
+          description: Neautorizovano.
+        '404':
+          description: Tag ne postoji.
