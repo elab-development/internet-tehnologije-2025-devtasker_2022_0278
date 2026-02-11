@@ -1159,3 +1159,162 @@ p {
   pointer-events: none;        /* opcionalno: da nikad ne smeta kliku */
 }
 
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.metricsPanel {
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+}
+
+.metricsPanel h2 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.metricsPanel--wide {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 980px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .metricsPanel--wide {
+    grid-column: auto;
+  }
+}
+
+/* YouTube page. */
+.ytPage {
+  padding: 22px;
+}
+
+.ytTitle {
+  margin: 0;
+  font-size: 42px;
+  color: #2b5c77;
+}
+
+.ytSubtitle {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #222;
+}
+
+.ytAlert {
+  margin-top: 12px;
+  background: rgba(255, 0, 0, 0.10);
+  border: 1px solid rgba(255, 0, 0, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 800;
+}
+
+.ytControls {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ytInput {
+  flex: 1 1 320px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.20);
+  font-weight: 700;
+}
+
+.ytButton {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #2b5c77;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.ytButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ytLoading {
+  margin-top: 16px;
+  font-weight: 800;
+}
+
+.ytGrid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.ytCard {
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.12s ease;
+}
+
+.ytCard:hover {
+  transform: translateY(-2px);
+}
+
+.ytThumb {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.ytThumb--empty {
+  background: rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #333;
+}
+
+.ytCardBody {
+  padding: 14px;
+}
+
+.ytCardTitle {
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.ytCardChannel {
+  margin-top: 6px;
+  font-weight: 800;
+  color: #2b5c77;
+  font-size: 13px;
+}
+
+.ytCardDesc {
+  margin-top: 10px;
+  color: #333;
+  font-size: 13px;
+  line-height: 1.35;
+}
+

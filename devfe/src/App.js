@@ -19,6 +19,8 @@ import Tags from "./pages/Tags";
 import DevHome from "./pages/DevHome";
 import Footer from "./components/Footer"
 
+import Youtube from "./pages/Youtube";
+
 function getHomeRoute(role) {
   switch (role) {
     case "product_owner":
@@ -125,6 +127,11 @@ export default function App() {
             <Route
               path="/dev"
               element={requireRole(["developer"], <DevHome />)}
+            />
+
+            <Route
+              path="/youtube"
+              element={requireRole(["developer"], <Youtube/>)}
             />
 
             {/* Admin */}
